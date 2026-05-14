@@ -163,7 +163,7 @@ Her 2-3 soruda bir Unsplash fotoğraflı motivasyon ekranı:
 | GitHub | `erdemsngn/kegelmax` ✅ oluşturuldu |
 | Stripe | Hesap var, entegrasyon YAPILMADI |
 | Supabase | KURULMADI |
-| Vercel | Deploy YAPILMADI |
+| Vercel | ✅ Deploy edildi — kegelmax.vercel.app |
 | E-posta servisi | KURULMADI |
 
 ---
@@ -176,7 +176,7 @@ Her 2-3 soruda bir Unsplash fotoğraflı motivasyon ekranı:
 4. ✅ Checkout sayfası
 5. ✅ Motivasyon görselleri
 6. ✅ GitHub'a yükle (erdemsngn/kegelmax)
-7. 🔲 Vercel deploy (internete aç)
+7. ✅ Vercel deploy (internete aç) — kegelmax.vercel.app
 8. 🔲 Stripe ödeme entegrasyonu
 9. 🔲 Supabase veritabanı
 10. 🔲 E-posta gönderimi
