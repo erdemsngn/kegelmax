@@ -116,14 +116,31 @@ function SimpleIllus() {
 }
 
 // ─── Option components ─────────────────────────────────────────────────────────
+const AGE_PHOTOS: Record<string, string> = {
+  "18-29": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=500&fit=crop&q=80",
+  "30-39": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&q=80",
+  "40-49": "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=500&fit=crop&q=80",
+  "50+":   "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=400&h=500&fit=crop&q=80",
+};
+
 function AgeCards({ opts, onSelect }: { opts: string[]; onSelect: (v: string) => void }) {
   return (
     <div className="grid grid-cols-2 gap-3">
       {opts.map(o => (
         <button key={o} onClick={() => onSelect(o)}
-          className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-[#1A1A1A] border border-[#2A2A2A] hover:border-[#C9A84C] active:scale-95 transition-all">
-          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#C9A84C]/25 to-[#C9A84C]/5 border border-[#C9A84C]/30 flex items-center justify-center">
-            <span className="text-[#C9A84C] font-black text-sm">{o}</span>
+          className="relative rounded-2xl overflow-hidden border border-[#2A2A2A] hover:border-[#C9A84C] active:scale-95 transition-all aspect-[3/4]">
+          {/* Photo */}
+          <img
+            src={AGE_PHOTOS[o]}
+            alt={o}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          {/* Labels */}
+          <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-3">
+            <span className="text-white font-black text-lg leading-none">{o}</span>
+            <span className="text-[#C9A84C] font-black text-lg leading-none">›</span>
           </div>
         </button>
       ))}
@@ -245,6 +262,58 @@ export default function QuizPage() {
     center: { x: 0, opacity: 1 },
     exit:  (d: number) => ({ x: d > 0 ? -40 : 40, opacity: 0 }),
   };
+
+  // Age step — tam sayfa özel layout
+  if (current.type === "q" && current.kind === "age") {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex flex-col max-w-[430px] mx-auto px-4 py-4">
+        {/* Adım sayacı + progress */}
+        <div className="space-y-2 mb-5">
+          <p className="text-xs text-[#888]">
+            Adım <span className="text-[#C9A84C] font-bold">1</span> / {TOTAL_Q}
+          </p>
+          <div className="w-full h-1 bg-[#1E1E1E] rounded-full overflow-hidden">
+            <div className="h-full bg-[#C9A84C] rounded-full" style={{ width: "4%" }} />
+          </div>
+        </div>
+
+        {/* Logo */}
+        <div className="flex items-center gap-3 mb-6">
+          <LogoIcon size={36} />
+          <div>
+            <p className="text-white font-black text-base leading-none">Kegel Max</p>
+            <p className="text-[#C9A84C] text-xs font-semibold leading-none mt-0.5">Pelvic Güç</p>
+          </div>
+        </div>
+
+        {/* Başlık */}
+        <h1 className="text-3xl font-black text-white leading-tight mb-3">
+          Kontrolünü Güçlendir<br />Performansını Yükselt
+        </h1>
+
+        {/* Badge */}
+        <div className="flex items-center gap-2 mb-6">
+          <span className="text-[#C9A84C] text-sm">⏱</span>
+          <span className="text-[#888] text-sm font-medium">1 Dakikalık Quiz</span>
+        </div>
+
+        {/* Fotoğraflı kartlar */}
+        <div className="flex-1">
+          <AgeCards opts={current.opts!} onSelect={v => handleSelect(current.id, v)} />
+        </div>
+
+        {/* Trust bar */}
+        <div className="flex items-center justify-center gap-2 py-4 mt-2">
+          <span className="text-[#555] text-xs">🔒</span>
+          <span className="text-[#555] text-xs">%100 gizli</span>
+          <span className="text-[#333] text-xs">•</span>
+          <span className="text-[#555] text-xs">Güvenli</span>
+          <span className="text-[#333] text-xs">•</span>
+          <span className="text-[#555] text-xs">Bilimsel</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] flex flex-col max-w-[430px] mx-auto">
