@@ -11,6 +11,7 @@ const font = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Kegel Max — Erkek Sağlığı Koçu",
   description: "Cinsel sağlığını ve performansını geliştir. Bilim destekli kişisel kegel programı.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

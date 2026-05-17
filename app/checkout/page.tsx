@@ -128,13 +128,20 @@ const PLANS = [
 export default function CheckoutPage() {
   const router    = useRouter();
   const [plan, setPlan] = useState("28d");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const countdown = useCountdown(9 * 60 + 33);
   useConfetti();
 
   const selected = PLANS.find(p => p.id === plan)!;
 
   function handlePay() {
-    alert("Ödeme sistemi yakında aktif olacak!");
+    if (!email || !email.includes("@")) {
+      setEmailError("Geçerli bir e-posta gir");
+      return;
+    }
+    setEmailError("");
+    localStorage.setItem("km_email", email);
     router.push("/success");
   }
 
@@ -232,6 +239,19 @@ export default function CheckoutPage() {
         </div>
         <p className="text-emerald-400 text-xs font-bold">%{selected.saving.replace("%","")} tasarruf edersiniz</p>
         <p className="text-[#555] text-xs">İstediğin zaman iptal edebilirsin</p>
+      </div>
+
+      {/* E-posta */}
+      <div className="space-y-2">
+        <input
+          type="email"
+          placeholder="E-posta adresin"
+          value={email}
+          onChange={e => { setEmail(e.target.value); setEmailError(""); }}
+          className="w-full px-4 py-3.5 rounded-2xl bg-[#141414] border border-[#2A2A2A] text-white placeholder-[#555] text-sm focus:outline-none focus:border-[#C9A84C] transition-colors"
+        />
+        {emailError && <p className="text-red-400 text-xs px-1">{emailError}</p>}
+        <p className="text-[#555] text-xs px-1">Plan bilgileri bu adrese gönderilecek</p>
       </div>
 
       {/* Pay button */}

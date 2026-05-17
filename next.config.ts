@@ -13,7 +13,9 @@ const nextConfig: NextConfig = {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
   images: {
-    domains: ["images.unsplash.com"],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
   },
 };
 

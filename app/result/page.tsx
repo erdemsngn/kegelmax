@@ -212,52 +212,17 @@ function GoalStep({ onNext }: { onNext: () => void }) {
   );
 }
 
-// ── Step 3: Comparison table ─────────────────────────────────────────────────
+// ── Step 3: Comparison ───────────────────────────────────────────────────────
 function ComparisonStep() {
   const router = useRouter();
-
-  const rows = [
-    { label:"Kegel Seviyesi",       before:"Başlangıç",         after:"Uzman" },
-    { label:"SKT Seviyesi",          before:"Keşfediliyor",      after:"Kontrolde" },
-    { label:"Partner Memnuniyeti",   before:"Ortalamanın altı",  after:"Yüksek" },
-    { label:"Dayanıklılık",          before:"Ortalama",          after:"Mükemmel" },
-  ];
-
   return (
-    <div className="flex flex-col flex-1 gap-7 px-4 py-8">
-      <div className="space-y-1">
-        <h2 className="text-2xl font-black text-white">Kişisel 28 Günlük<br/>Kegel Meydan Okuması</h2>
+    <div className="flex flex-col flex-1 gap-5 px-4 py-6">
+      <div className="relative rounded-2xl overflow-hidden">
+        <img src="/info-simdiki-hedef.jpg" alt="Şimdiki halin vs hedefin" className="w-full" />
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
       </div>
-
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-2xl overflow-hidden">
-        {/* Header */}
-        <div className="grid grid-cols-3 border-b border-[#2A2A2A]">
-          <div className="p-3 col-span-1" />
-          <div className="p-3 border-l border-[#2A2A2A] text-center">
-            <p className="text-xs text-[#666] font-semibold">Önce</p>
-          </div>
-          <div className="p-3 border-l border-[#C9A84C]/30 text-center bg-[#C9A84C]/5">
-            <p className="text-xs text-[#C9A84C] font-semibold">Sonra</p>
-          </div>
-        </div>
-        {rows.map((r, i) => (
-          <div key={r.label}
-            className={`grid grid-cols-3 ${i < rows.length - 1 ? "border-b border-[#1E1E1E]" : ""}`}>
-            <div className="p-3 flex items-center">
-              <p className="text-xs text-[#888] leading-snug">{r.label}</p>
-            </div>
-            <div className="p-3 border-l border-[#2A2A2A] flex items-center justify-center">
-              <p className="text-xs text-[#555]">{r.before}</p>
-            </div>
-            <div className="p-3 border-l border-[#C9A84C]/30 bg-[#C9A84C]/5 flex items-center justify-center">
-              <p className="text-xs text-[#C9A84C] font-bold">{r.after}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <button onClick={() => router.push("/checkout")}
-        className="w-full py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-base hover:bg-[#E8C97A] transition-colors">
+        className="w-full py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-lg hover:bg-[#E8C97A] transition-colors">
         Planımı Almak İstiyorum →
       </button>
     </div>
