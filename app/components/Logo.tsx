@@ -5,19 +5,23 @@ export function LogoIcon({ size = 40 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       {/* Altın arka plan */}
       <rect width="40" height="40" rx="10" fill="#C9A84C" />
-      {/* K harfi — siyah, kalın */}
-      <path
-        d="M13 10 L13 30"
-        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
-      />
-      <path
-        d="M13 20 L25 11"
-        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
-      />
-      <path
-        d="M13 20 L25 30"
-        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
-      />
+
+      {/* Anime hız çizgileri — okun ucundan yukarı-sağa fışkırıyor */}
+      <line x1="28" y1="8"  x2="33" y2="2"  stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.60"/>
+      <line x1="31" y1="12" x2="38" y2="9"  stroke="white" strokeWidth="0.9" strokeLinecap="round" strokeOpacity="0.42"/>
+      <line x1="26" y1="5"  x2="29" y2="0"  stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeOpacity="0.30"/>
+
+      {/* K — dikey çubuk */}
+      <path d="M12 9 L12 31" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+
+      {/* K — alt kol */}
+      <path d="M12 20 L26 31" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+
+      {/* K — üst kol (oka kadar) */}
+      <path d="M12 20 L26 9" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+
+      {/* Ok ucu — üst kolun ucunda, yukarı-sağa işaret ediyor */}
+      <path d="M20 10 L26 9 L25 15" stroke="#0A0A0A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
