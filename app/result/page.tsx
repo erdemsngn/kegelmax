@@ -250,28 +250,36 @@ function GoalStep({ onNext }: { onNext: () => void }) {
 
       {/* Animated S-curve */}
       <div className="bg-[#141414] border border-[#2A2A2A] rounded-2xl p-4">
-        <svg viewBox="0 0 280 145" className="w-full overflow-visible">
-          {[0, 40, 80, 120].map((y, i) => (
-            <line key={i} x1="30" y1={130 - y} x2="270" y2={130 - y} stroke="#1E1E1E" strokeWidth="1" />
-          ))}
-          {[0, 40, 80, 120].map((y, i) => (
-            <text key={i} x="5" y={134 - y} fill="#444" fontSize="8">{i * 100}%</text>
-          ))}
+        <svg viewBox="0 0 280 160" className="w-full overflow-visible">
+
+          {/* Başlık */}
+          <text x="16" y="14" fill="#666" fontSize="8.5" fontWeight="600">Performans Seviyeniz</text>
+
+          {/* Grid yatay çizgiler */}
+          <line x1="16" y1="28" x2="264" y2="28" stroke="#1E1E1E" strokeWidth="1"/>
+          <line x1="16" y1="55" x2="264" y2="55" stroke="#1E1E1E" strokeWidth="1"/>
+          <line x1="16" y1="82" x2="264" y2="82" stroke="#1E1E1E" strokeWidth="1"/>
+          <line x1="16" y1="115" x2="264" y2="115" stroke="#2A2A2A" strokeWidth="1"/>
+
+          {/* Gradient dolgu */}
           <defs>
             <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#C9A84C" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#C9A84C" stopOpacity="0" />
+              <stop offset="0%" stopColor="#C9A84C" stopOpacity="0.18"/>
+              <stop offset="100%" stopColor="#C9A84C" stopOpacity="0"/>
             </linearGradient>
           </defs>
+
           <motion.path
-            d="M40 125 C80 125 100 105 130 85 S185 30 255 12 L255 130 L40 130Z"
+            d="M38 113 C75 113 108 98 144 74 S200 30 250 26 L250 115 L38 115Z"
             fill="url(#areaGrad)"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.6, duration: 0.6 }}
+            transition={{ delay: 1.6, duration: 0.8 }}
           />
+
+          {/* S-eğrisi */}
           <motion.path
-            d="M40 125 C80 125 100 105 130 85 S185 30 255 12"
+            d="M38 113 C75 113 108 98 144 74 S200 30 250 26"
             stroke="#C9A84C"
             strokeWidth="2.5"
             fill="none"
@@ -280,33 +288,36 @@ function GoalStep({ onNext }: { onNext: () => void }) {
             animate={{ pathLength: 1 }}
             transition={{ duration: 2, ease: "easeInOut" }}
           />
-          {[
-            { x: 40,  y: 125, l: "Hafta 1", delay: 0.3 },
-            { x: 110, y: 100, l: "Hafta 2", delay: 0.8 },
-            { x: 180, y: 52,  l: "Hafta 3", delay: 1.3 },
-            { x: 255, y: 12,  l: "Hafta 4", delay: 1.8 },
-          ].map(p => (
-            <motion.g key={p.l}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: p.delay, duration: 0.3 }}>
-              <circle cx={p.x} cy={p.y} r="4" fill="#C9A84C" />
-              <text x={p.x} y={p.y - 8} textAnchor="middle" fill="#888" fontSize="7">{p.l}</text>
-            </motion.g>
+
+          {/* X ekseni etiketleri — altta */}
+          {["Hafta 1","Hafta 2","Hafta 3","Hafta 4"].map((l, i) => (
+            <text key={l} x={38 + i * 71} y={132} textAnchor="middle" fill="#555" fontSize="8">{l}</text>
           ))}
-          <motion.text x="80" y="108" textAnchor="middle" fill="#888" fontSize="7"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}>
-            İlk Sonuçlar
-          </motion.text>
-          <motion.text x="255" y="5" textAnchor="middle" fill="#C9A84C" fontSize="8" fontWeight="700"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 1.9, duration: 0.5 }}>
-            Hedef ↑
-          </motion.text>
-          <text x="148" y="72" textAnchor="middle" fill="#C9A84C" fontSize="7.5" fontWeight="600">
-            Mahrem Hayat Seviyesi
-          </text>
+
+          {/* Başlangıç noktası */}
+          <motion.circle cx="38" cy="113" r="5" fill="#141414" stroke="#C9A84C" strokeWidth="2"
+            initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.3 }}/>
+
+          {/* Bitiş noktası */}
+          <motion.circle cx="250" cy="26" r="5" fill="#141414" stroke="#C9A84C" strokeWidth="2"
+            initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.9, duration: 0.3 }}/>
+
+          {/* "Şimdi" baloncuğu — başlangıç noktasının sağ üstü */}
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+            <rect x="44" y="95" width="40" height="15" rx="4" fill="#2A2A2A" stroke="#3A3A3A" strokeWidth="0.8"/>
+            <path d="M46 110 L38 113 L54 110" fill="#2A2A2A"/>
+            <text x="64" y="106" textAnchor="middle" fill="#C9A84C" fontSize="8.5" fontWeight="700">Şimdi</text>
+          </motion.g>
+
+          {/* "4 Hafta Sonra" baloncuğu — bitiş noktasının sol üstü */}
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.1 }}>
+            <rect x="182" y="5" width="66" height="19" rx="5" fill="#C9A84C"/>
+            <path d="M238 24 L250 26 L232 24" fill="#C9A84C"/>
+            <text x="215" y="18" textAnchor="middle" fill="#0A0A0A" fontSize="8" fontWeight="800">4 Hafta Sonra</text>
+          </motion.g>
+
         </svg>
       </div>
 
