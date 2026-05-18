@@ -116,8 +116,8 @@ const PLANS = [
     price:    "₺1.599",
     priceNum: 1599,
     original: "₺2.499",
-    saving:   "%36",
-    savingClr:"text-[#888]",
+    saving:   "Günde ₺4",
+    savingClr:"text-emerald-400",
     note:     "Günde sadece ₺4 — en ucuz seçenek",
     badge:    "EN MANTIKLI",
     badgeCls: "bg-emerald-600 text-white",
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
                   <p className="text-[#C9A84C] font-black text-2xl leading-tight">{p.price}</p>
                   {/* Save badge */}
                   <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/5 ${p.savingClr}`}>
-                    Save {p.saving}
+                    {p.id === "yearly" ? p.saving : `Save ${p.saving}`}
                   </span>
                 </div>
               </div>
@@ -241,6 +241,17 @@ export default function CheckoutPage() {
         <p className="text-[#555] text-xs">İstediğin zaman iptal edebilirsin</p>
       </div>
 
+      {/* Sosyal kanıt */}
+      <div className="flex gap-3 p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl items-start">
+        <span className="text-2xl shrink-0">⭐</span>
+        <div>
+          <p className="text-white text-sm font-semibold leading-snug">
+            "3. haftada gerçekten fark ettim. Daha önce hiç böyle hissetmemiştim."
+          </p>
+          <p className="text-[#555] text-xs mt-1">— Ahmet Y., 34 · İstanbul · 28 Günlük Plan</p>
+        </div>
+      </div>
+
       {/* E-posta */}
       <div className="space-y-2">
         <input
@@ -260,14 +271,20 @@ export default function CheckoutPage() {
         PLANIMI AL 🔒
       </button>
 
-      {/* Fine print — plan bazlı dinamik */}
-      <p className="text-center text-[10px] text-[#444] leading-relaxed px-2">
-        İNDİRİM OTOMATIK UYGULANMIŞTIR. İLK{" "}
-        {selected.id === "weekly" ? "HAFTA" : selected.id === "28d" ? "28 GÜN" : "YIL"}{" "}
-        İÇİN {selected.price} OLARAK ÜCRETLENDİRİLECEKSİN. BU SÜRE SONUNDA ABONELİĞİN{" "}
-        {selected.original} TAM FİYATINDAN OTOMATİK YENİLENECEKTİR. ABONELİĞİNİ İSTEDİĞİN ZAMAN İPTAL EDEBİLİRSİN:{" "}
-        <span className="text-[#666]">DESTEK@KEGELMAX.COM</span>
-      </p>
+      {/* Otomatik yenileme — görünür bilgi kutusu */}
+      <div className="p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl space-y-1.5">
+        <p className="text-[#888] text-xs font-bold flex items-center gap-1.5">
+          <span>🔄</span> Abonelik Bilgisi
+        </p>
+        <p className="text-[#666] text-xs leading-relaxed">
+          İlk {selected.id === "weekly" ? "hafta" : selected.id === "28d" ? "28 gün" : "yıl"} için{" "}
+          <span className="text-white font-semibold">{selected.price}</span> ücretlendirilirsin.
+          Bu süre sonunda aboneliğin{" "}
+          <span className="text-white font-semibold">{selected.original}</span> tam fiyatından otomatik yenilenir.
+          İstediğin zaman iptal edebilirsin:{" "}
+          <span className="text-[#C9A84C]">destek@kegelmax.com</span>
+        </p>
+      </div>
 
       {/* Guarantee card */}
       <div className="border border-[#C9A84C]/35 rounded-2xl p-5 text-center space-y-2 bg-[#141414]">
