@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { LogoIcon } from "../components/Logo";
 
 // ── Confetti (canvas, altın + beyaz, dependency-free) ──────────────────────
@@ -102,38 +103,40 @@ const TESTIMONIALS = [
 ];
 
 function TestimonialCarousel() {
-  // Her oturumda/kullanıcıda farklı grup başlasın
-  const [groupIdx, setGroupIdx] = useState(() => Math.floor(Math.random() * 4));
-  const [fading, setFading] = useState(false);
+  const [idx, setIdx] = useState(() => Math.floor(Math.random() * 16));
 
   useEffect(() => {
     const id = setInterval(() => {
-      setFading(true);
-      setTimeout(() => {
-        setGroupIdx(g => (g + 1) % 4);
-        setFading(false);
-      }, 350);
+      setIdx(i => (i + 1) % 16);
     }, 4000);
     return () => clearInterval(id);
   }, []);
 
-  const group = TESTIMONIALS.slice(groupIdx * 4, groupIdx * 4 + 4);
+  const t = TESTIMONIALS[idx];
 
   return (
-    <div className="space-y-2" style={{ transition: "opacity 0.35s", opacity: fading ? 0 : 1 }}>
+    <div className="space-y-2">
       <p className="text-[#555] text-[10px] uppercase tracking-widest font-semibold px-0.5">
-        Kullanıcı Yorumları · {groupIdx * 4 + 1}–{groupIdx * 4 + 4} / 16
+        Kullanıcı Yorumları · {idx + 1} / 16
       </p>
-      {group.map((t, i) => (
-        <div key={`${groupIdx}-${i}`}
-          className="flex gap-2.5 p-3 bg-[#141414] border border-[#2A2A2A] rounded-xl items-start">
-          <span className="text-sm shrink-0 mt-0.5">⭐</span>
-          <div className="min-w-0">
-            <p className="text-white/90 text-xs leading-relaxed">&ldquo;{t.text}&rdquo;</p>
-            <p className="text-[#555] text-[10px] mt-1">— {t.name}, {t.meta}</p>
-          </div>
-        </div>
-      ))}
+      <div className="overflow-hidden rounded-2xl">
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={idx}
+            initial={{ x: 260, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -260, opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="flex gap-3 p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl items-start"
+          >
+            <span className="text-xl shrink-0">⭐</span>
+            <div className="min-w-0">
+              <p className="text-white/90 text-sm leading-relaxed">&ldquo;{t.text}&rdquo;</p>
+              <p className="text-[#555] text-xs mt-1.5">— {t.name}, {t.meta}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
