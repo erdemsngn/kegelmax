@@ -6,21 +6,23 @@ const TR_MONTHS = [
   "Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",
 ];
 
-function dayOfYear(d: Date) {
-  const start = new Date(d.getFullYear(), 0, 0);
-  return Math.floor((d.getTime() - start.getTime()) / 86_400_000);
-}
-
 function daysLeftInMonth(d: Date) {
   const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
   return lastDay - d.getDate();
+}
+
+function totalMembers(d: Date) {
+  // Lansman: 1 Ocak 2024 — her gün ~200 yeni kullanıcı
+  const launch = new Date(2024, 0, 1);
+  const days = Math.floor((d.getTime() - launch.getTime()) / 86_400_000);
+  return Math.max(0, 250_000 + days * 200);
 }
 
 export default function UrgencyBar() {
   const { members, daysLeft, monthName } = useMemo(() => {
     const now = new Date();
     return {
-      members:   (1400 + dayOfYear(now) * 23).toLocaleString("tr-TR"),
+      members:   totalMembers(now).toLocaleString("tr-TR"),
       daysLeft:  daysLeftInMonth(now),
       monthName: TR_MONTHS[now.getMonth()],
     };
@@ -29,17 +31,14 @@ export default function UrgencyBar() {
   return (
     <div className="fixed top-14 left-0 right-0 z-40 bg-[#C9A84C] max-w-[430px] mx-auto">
       <div className="flex items-center justify-between px-4 py-1.5 gap-2">
-        {/* Sol — indirim */}
         <div className="flex items-center gap-1.5 min-w-0">
           <span className="text-black text-[10px]">🔥</span>
           <p className="text-black text-[10px] font-black leading-tight whitespace-nowrap">
             {monthName} indirimi — <span className="underline">{daysLeft} gün kaldı</span>
           </p>
         </div>
-
-        {/* Sağ — katılan kişi */}
         <p className="text-black text-[10px] font-bold whitespace-nowrap shrink-0">
-          👥 {members} katıldı
+          👥 {members} toplam üye
         </p>
       </div>
     </div>

@@ -341,8 +341,16 @@ export default function QuizPage() {
           <LogoIcon size={28} />
           <div className="w-8" />
         </div>
-        <div className="space-y-1">
-          {section && <p className="text-[10px] text-[#555] uppercase tracking-widest">{section}</p>}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            {section
+              ? <p className="text-[10px] text-[#555] uppercase tracking-widest">{section}</p>
+              : <span />}
+            <p className="text-[10px] text-[#888] font-mono tabular-nums">
+              <span className="text-[#C9A84C] font-bold">{qsDone + (current.type === "q" ? 1 : 0)}</span>
+              <span className="text-[#444]">/{TOTAL_Q}</span>
+            </p>
+          </div>
           <div className="w-full h-1 bg-[#1E1E1E] rounded-full overflow-hidden">
             <div className="h-full bg-[#C9A84C] rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
           </div>

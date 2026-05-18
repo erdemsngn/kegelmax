@@ -2,16 +2,22 @@ import Link from "next/link";
 
 export function LogoIcon({ size = 40 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="44" height="44" rx="12" fill="#141414" />
-      <circle cx="22" cy="25" r="13" stroke="#C9A84C" strokeWidth="1.8" fill="none" />
-      {/* K */}
-      <line x1="15" y1="18" x2="15" y2="31" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="15" y1="24.5" x2="24" y2="18" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="15" y1="24.5" x2="24" y2="31" stroke="#C9A84C" strokeWidth="2.5" strokeLinecap="round" />
-      {/* Arrow top-right */}
-      <path d="M30 5 H38 V13" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <line x1="38" y1="5" x2="29" y2="14" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" />
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Altın arka plan */}
+      <rect width="40" height="40" rx="10" fill="#C9A84C" />
+      {/* K harfi — siyah, kalın */}
+      <path
+        d="M13 10 L13 30"
+        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
+      />
+      <path
+        d="M13 20 L25 11"
+        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
+      />
+      <path
+        d="M13 20 L25 30"
+        stroke="#0A0A0A" strokeWidth="3.5" strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -19,8 +25,11 @@ export function LogoIcon({ size = 40 }: { size?: number }) {
 export default function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <LogoIcon size={36} />
-      <span className="font-bold text-white text-[15px] tracking-tight">Kegel Max</span>
+      <LogoIcon size={34} />
+      <div className="flex flex-col leading-none">
+        <span className="font-black text-white text-[13px] tracking-[0.06em] uppercase">Kegel</span>
+        <span className="font-black text-[#C9A84C] text-[13px] tracking-[0.10em] uppercase">Max</span>
+      </div>
     </Link>
   );
 }

@@ -13,7 +13,7 @@ export default function Badges() {
           </div>
           <div className="w-px bg-[#2A2A2A]" />
           <div className="text-center">
-            <p className="text-2xl font-black text-white">1M+</p>
+            <p className="text-2xl font-black text-white">350 bin+</p>
             <p className="text-xs text-[#888] mt-0.5">Aktif kullanıcı</p>
           </div>
         </div>

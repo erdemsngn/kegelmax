@@ -15,10 +15,10 @@ export default function Hero() {
         style={{ background: "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 70%)" }} />
 
       {/* ── Metin + CTA ─────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-[430px] mx-auto px-4 pt-10 pb-10 space-y-6">
+      <div className="relative z-10 max-w-[430px] mx-auto px-4 pt-14 pb-10 space-y-6">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141414] border border-[#2A2A2A] text-xs text-[#C9A84C] font-semibold">
-          ⭐ 4.7 App Store Puanı &nbsp;•&nbsp; 1M+ Kullanıcı
+          ⭐ 4.7 App Store Puanı &nbsp;•&nbsp; 350 bin+ Kullanıcı
         </div>
 
         {/* Heading */}
@@ -37,8 +37,7 @@ export default function Hero() {
         <div className="space-y-2">
           <QuizStartButton />
           <p className="text-[#555] text-[11px] flex items-center gap-1.5">
-            <span>🔒</span>
-            Cevapların saklanmaz · Kadın & erkek için · %100 gizli
+            <span>🔒</span> Cevaplar saklanmaz. Gizlilik esastır. <span>🔒</span>
           </p>
         </div>
 
