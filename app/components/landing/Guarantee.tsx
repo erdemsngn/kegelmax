@@ -19,7 +19,7 @@ export default function Guarantee() {
             ))}
           </div>
           <QuizStartButton className="block w-full py-3.5 rounded-2xl bg-[#C9A84C] text-black font-bold text-sm hover:bg-[#E8C97A] transition-colors">
-            Ücretsiz Başla →
+            Programa Hemen Başla →
           </QuizStartButton>
         </div>
       </div>

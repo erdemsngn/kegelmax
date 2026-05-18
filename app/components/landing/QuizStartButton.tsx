@@ -9,7 +9,7 @@ interface Props {
 
 export default function QuizStartButton({
   className = "inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-base hover:bg-[#E8C97A] transition-all btn-glow",
-  children = "Ücretsiz Değerlendirmeni Al →",
+  children = "Programını Al →",
 }: Props) {
   const [open, setOpen] = useState(false);
 

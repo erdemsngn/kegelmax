@@ -59,7 +59,7 @@ export default function StickyCtaBar() {
           className="flex-1 py-3 rounded-xl bg-[#C9A84C] text-black font-black text-sm
                      hover:bg-[#E8C97A] transition-colors text-center whitespace-nowrap"
         >
-          Ücretsiz Başla →
+          Programa Hemen Başla →
         </button>
       </div>
 

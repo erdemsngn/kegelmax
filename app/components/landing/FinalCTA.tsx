@@ -11,7 +11,7 @@ export default function FinalCTA() {
         </h2>
         <p className="text-[#888] text-sm">50.000+ erkek bu programla sonuç aldı</p>
         <QuizStartButton className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-base hover:bg-[#E8C97A] transition-all btn-glow">
-          Ücretsiz Değerlendirmeni Al →
+          Kendini Yeniden Keşfet →
         </QuizStartButton>
         <p className="text-[#555] text-xs">Kredi kartı gerekmez &nbsp;·&nbsp; İstediğin zaman iptal et</p>
       </div>
