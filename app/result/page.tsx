@@ -78,8 +78,8 @@ const BARS = [
   "Psikoloji durumu",
   "Kegel planı",
 ];
-const TARGETS = [100, 100, 100, 87];
-const BAR_DURATION = 1100;
+const TARGETS = [100, 100, 100, 100];
+const BAR_DURATION = 1900;
 
 function LoadingStep({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState([0, 0, 0, 0]);
@@ -187,8 +187,12 @@ function LoadingStep({ onDone }: { onDone: () => void }) {
                 transition={{ duration: 0.3 }}
                 className={`flex items-start gap-2 text-xs font-mono shrink-0 ${
                   i === logs.length - 1
-                    ? msg.startsWith("✓") ? "text-[#C9A84C]" : "text-white"
-                    : "text-[#3a3a3a]"
+                    ? msg.startsWith("✓") ? "text-[#C9A84C]" : "text-[#E8C97A]"
+                    : i === logs.length - 2
+                    ? "text-[#C9A84C]/70"
+                    : i === logs.length - 3
+                    ? "text-[#C9A84C]/45"
+                    : "text-[#666]"
                 }`}
               >
                 <span className="shrink-0 mt-0.5 select-none">

@@ -26,11 +26,11 @@ export default function LandingPage() {
         <WhyUnique />
         <Badges />
         <MediaLogos />
+        <Experts />
         <Programs />
         <Stats />
         <HowItWorks />
         <Comparison />
-        <Experts />
         <Testimonials />
         <FAQ />
         <Guarantee />
