@@ -106,14 +106,41 @@ function AnatomyInfo({ onNext }: { onNext: () => void }) {
   );
 }
 
+// ─── Görsel başına kırpma miktarı (px) ───────────────────────────────────────
+// 0 = kırpma yok (görselin altı önemli içerik taşıyor)
+// >0 = görselin içindeki buton alanı kadar kırp
+const IMG_CROP: Record<string, number> = {
+  // DEVAM ET butonu olan görseller
+  "info-dayaniklilik.jpg":  72,
+  "info-60sn.jpg":          72,
+  "info-5dk.jpg":           72,
+  "info-aliskanlik.jpg":    72,
+  "info-binlerce.jpg":      72,
+  "info-ozguven-cift.jpg":  72,
+  // Hayır/Evet butonu olan görseller
+  "info-elestiri.jpg":      64,
+  "info-katiliyor.jpg":     64,
+  "info-masturbasyon.jpg":  64,
+  "info-porno-ihtiyac.jpg": 64,
+  "info-porno-tv.jpg":      64,
+  "info-sagliksiz.jpg":     64,
+  // Alt kısmı önemli → kırpma yok
+  "info-milyon.jpg":         0,   // GQ/Men's Health logolar
+  "info-bilim.jpg":          0,   // Mayo Clinic kartı
+  "info-kacınma.jpg":        0,   // döngü diyagramı
+  "info-zihin-kontrol.jpg":  0,   // döngü diyagramı
+  "info-basarisiz-ses.jpg":  0,   // içeride buton yok
+  "info-ozguven-sarsil.jpg": 0,   // içeride buton yok
+};
+
 // ─── Info-img: tam görsel ekran ───────────────────────────────────────────────
 function InfoImgStep({ img, onNext }: { img: string; onNext: () => void }) {
+  const crop = IMG_CROP[img] ?? 0;
   return (
     <div className="flex flex-col gap-4 pt-2 pb-2">
-      <div className="relative rounded-2xl overflow-hidden">
-        <img src={`/${img}`} alt="" className="w-full" loading="lazy" />
-        {/* Görselin içindeki DEVAM ET butonunu örter */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+      <div className="rounded-2xl overflow-hidden">
+        <img src={`/${img}`} alt="" className="w-full block" loading="lazy"
+          style={crop ? { marginBottom: `-${crop}px` } : undefined} />
       </div>
       <button onClick={onNext}
         className="w-full py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-lg hover:bg-[#E8C97A] transition-colors">
@@ -125,12 +152,12 @@ function InfoImgStep({ img, onNext }: { img: string; onNext: () => void }) {
 
 // ─── Agree: Katılıyor musun? ──────────────────────────────────────────────────
 function AgreeStep({ img, onSelect }: { img: string; onSelect: (v: string) => void }) {
+  const crop = IMG_CROP[img] ?? 0;
   return (
     <div className="flex flex-col gap-4 pt-2 pb-2">
-      <div className="relative rounded-2xl overflow-hidden">
-        <img src={`/${img}`} alt="" className="w-full" loading="lazy" />
-        {/* Görselin içindeki Hayır/Evet butonlarını örter */}
-        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
+      <div className="rounded-2xl overflow-hidden">
+        <img src={`/${img}`} alt="" className="w-full block" loading="lazy"
+          style={crop ? { marginBottom: `-${crop}px` } : undefined} />
       </div>
       <div className="grid grid-cols-2 gap-3">
         <button onClick={() => onSelect("hayır")}
@@ -165,11 +192,6 @@ function AgeCards({ opts, onSelect }: { opts: string[]; onSelect: (v: string) =>
             backgroundSize: "200% 200%",
             backgroundPosition: AGE_SPRITE[o],
           }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-3">
-            <span className="text-white font-black text-lg leading-none">{o}</span>
-            <span className="text-[#C9A84C] font-black text-xl leading-none">›</span>
-          </div>
         </button>
       ))}
     </div>

@@ -1,4 +1,6 @@
 import Navbar       from "./components/landing/Navbar";
+import UrgencyBar   from "./components/landing/UrgencyBar";
+import StickyCtaBar from "./components/landing/StickyCtaBar";
 import Hero         from "./components/landing/Hero";
 import WhyUnique    from "./components/landing/WhyUnique";
 import Badges       from "./components/landing/Badges";
@@ -7,6 +9,7 @@ import Programs     from "./components/landing/Programs";
 import Stats        from "./components/landing/Stats";
 import HowItWorks   from "./components/landing/HowItWorks";
 import Comparison   from "./components/landing/Comparison";
+import Experts      from "./components/landing/Experts";
 import Testimonials from "./components/landing/Testimonials";
 import FAQ          from "./components/landing/FAQ";
 import Guarantee    from "./components/landing/Guarantee";
@@ -17,7 +20,8 @@ export default function LandingPage() {
   return (
     <>
       <Navbar />
-      <main>
+      <UrgencyBar />
+      <main className="pt-7">
         <Hero />
         <WhyUnique />
         <Badges />
@@ -26,12 +30,14 @@ export default function LandingPage() {
         <Stats />
         <HowItWorks />
         <Comparison />
+        <Experts />
         <Testimonials />
         <FAQ />
         <Guarantee />
         <FinalCTA />
       </main>
       <Footer />
+      <StickyCtaBar />
     </>
   );
 }

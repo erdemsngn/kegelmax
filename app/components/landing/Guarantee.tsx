@@ -1,4 +1,4 @@
-import Link from "next/link";
+import QuizStartButton from "./QuizStartButton";
 
 export default function Guarantee() {
   return (
@@ -18,10 +18,9 @@ export default function Guarantee() {
               <span key={b} className="px-3 py-1 rounded-full bg-[#1E1E1E] border border-[#2A2A2A]">{b}</span>
             ))}
           </div>
-          <Link href="/quiz"
-            className="block w-full py-3.5 rounded-2xl bg-[#C9A84C] text-black font-bold text-sm hover:bg-[#E8C97A] transition-colors">
+          <QuizStartButton className="block w-full py-3.5 rounded-2xl bg-[#C9A84C] text-black font-bold text-sm hover:bg-[#E8C97A] transition-colors">
             Ücretsiz Başla →
-          </Link>
+          </QuizStartButton>
         </div>
       </div>
     </section>

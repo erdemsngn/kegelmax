@@ -1,4 +1,4 @@
-import Link from "next/link";
+import QuizStartButton from "./QuizStartButton";
 
 export default function FinalCTA() {
   return (
@@ -10,10 +10,9 @@ export default function FinalCTA() {
           Dönüşümüne<br /><span className="text-[#C9A84C]">Bugün Başla</span>
         </h2>
         <p className="text-[#888] text-sm">50.000+ erkek bu programla sonuç aldı</p>
-        <Link href="/quiz"
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-base hover:bg-[#E8C97A] transition-all btn-glow">
+        <QuizStartButton className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-base hover:bg-[#E8C97A] transition-all btn-glow">
           Ücretsiz Değerlendirmeni Al →
-        </Link>
+        </QuizStartButton>
         <p className="text-[#555] text-xs">Kredi kartı gerekmez &nbsp;·&nbsp; İstediğin zaman iptal et</p>
       </div>
     </section>

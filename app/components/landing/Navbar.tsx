@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Logo from "../Logo";
+import QuizStartButton from "./QuizStartButton";
 
 const NAV = [
   { label: "Programlar",    href: "#programs" },
@@ -33,18 +33,16 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
-          <Link href="/quiz"
-            className="text-xs px-4 py-2 rounded-full bg-[#C9A84C] text-black font-bold hover:bg-[#E8C97A] transition-colors">
+          <QuizStartButton className="text-xs px-4 py-2 rounded-full bg-[#C9A84C] text-black font-bold hover:bg-[#E8C97A] transition-colors">
             Şimdi Başla
-          </Link>
+          </QuizStartButton>
         </div>
 
         {/* Mobile: just CTA + hamburger */}
         <div className="flex sm:hidden items-center gap-2">
-          <Link href="/quiz"
-            className="text-xs px-3 py-1.5 rounded-full bg-[#C9A84C] text-black font-bold">
+          <QuizStartButton className="text-xs px-3 py-1.5 rounded-full bg-[#C9A84C] text-black font-bold">
             Başla
-          </Link>
+          </QuizStartButton>
           <button onClick={() => setOpen(v => !v)}
             className="text-white text-lg w-8 h-8 flex items-center justify-center">
             {open ? "✕" : "☰"}

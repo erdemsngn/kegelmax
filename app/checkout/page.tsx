@@ -260,11 +260,13 @@ export default function CheckoutPage() {
         PLANIMI AL 🔒
       </button>
 
-      {/* Fine print */}
-      <p className="text-center text-[10px] text-[#444] leading-relaxed">
-        İndirim otomatik uygulandı. Abonelik seçilen süre sonunda tam fiyattan yenilenir.
-        İstediğin zaman iptal et:{" "}
-        <span className="text-[#666]">destek@kegelmax.com</span>
+      {/* Fine print — plan bazlı dinamik */}
+      <p className="text-center text-[10px] text-[#444] leading-relaxed px-2">
+        İNDİRİM OTOMATIK UYGULANMIŞTIR. İLK{" "}
+        {selected.id === "weekly" ? "HAFTA" : selected.id === "28d" ? "28 GÜN" : "YIL"}{" "}
+        İÇİN {selected.price} OLARAK ÜCRETLENDİRİLECEKSİN. BU SÜRE SONUNDA ABONELİĞİN{" "}
+        {selected.original} TAM FİYATINDAN OTOMATİK YENİLENECEKTİR. ABONELİĞİNİ İSTEDİĞİN ZAMAN İPTAL EDEBİLİRSİN:{" "}
+        <span className="text-[#666]">DESTEK@KEGELMAX.COM</span>
       </p>
 
       {/* Guarantee card */}

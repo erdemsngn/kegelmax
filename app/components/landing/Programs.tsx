@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import QuizStartButton from "./QuizStartButton";
 
 const PROGRAMS = [
   {
@@ -75,10 +75,9 @@ export default function Programs() {
           </div>
         </div>
 
-        <Link href="/quiz"
-          className="block w-full text-center py-3.5 rounded-2xl bg-[#C9A84C] text-black font-bold text-sm hover:bg-[#E8C97A] transition-colors">
+        <QuizStartButton className="block w-full text-center py-3.5 rounded-2xl bg-[#C9A84C] text-black font-bold text-sm hover:bg-[#E8C97A] transition-colors">
           Programına Başla →
-        </Link>
+        </QuizStartButton>
       </div>
     </section>
   );
