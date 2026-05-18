@@ -320,20 +320,14 @@ export default function CheckoutPage() {
         PLANIMI AL 🔒
       </button>
 
-      {/* Otomatik yenileme — görünür bilgi kutusu */}
-      <div className="p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl space-y-1.5">
-        <p className="text-[#888] text-xs font-bold flex items-center gap-1.5">
-          <span>🔄</span> Abonelik Bilgisi
-        </p>
-        <p className="text-[#666] text-xs leading-relaxed">
-          İlk {selected.id === "weekly" ? "hafta" : selected.id === "28d" ? "28 gün" : "yıl"} için{" "}
-          <span className="text-white font-semibold">{selected.price}</span> ücretlendirilirsin.
-          Bu süre sonunda aboneliğin{" "}
-          <span className="text-white font-semibold">{selected.original}</span> tam fiyatından otomatik yenilenir.
-          İstediğin zaman iptal edebilirsin:{" "}
-          <span className="text-[#C9A84C]">destek@kegelmax.com</span>
-        </p>
-      </div>
+      {/* Otomatik yenileme — ince fine print */}
+      <p className="text-[#444] text-[10px] leading-relaxed px-1">
+        İndirim yalnızca ilk{" "}
+        {selected.id === "weekly" ? "haftalık" : selected.id === "28d" ? "28 günlük" : "yıllık"}{" "}
+        abonelik dönemine uygulanmıştır. Dönem sonunda aboneliğin{" "}
+        {selected.original} standart fiyatından otomatik yenilenir.
+        İptal için: <span className="text-[#555]">destek@kegelmax.com</span>
+      </p>
 
       {/* Guarantee card */}
       <div className="border border-[#C9A84C]/35 rounded-2xl p-5 text-center space-y-2 bg-[#141414]">
