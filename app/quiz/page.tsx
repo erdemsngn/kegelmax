@@ -134,7 +134,83 @@ const IMG_CROP: Record<string, number> = {
 };
 
 // ─── Info-img: tam görsel ekran ───────────────────────────────────────────────
+const BILIM_UNIS = [
+  {
+    name: "STANFORD",
+    sub: "TIP FAKÜLTESİ",
+    logo: "🎓",
+    url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5031462/",
+    color: "#8C1515",
+  },
+  {
+    name: "HARVARD",
+    sub: "ÜNİVERSİTESİ",
+    logo: "🎓",
+    url: "https://www.health.harvard.edu/bladder-and-bowel/step-by-step-guide-to-performing-kegel-exercises",
+    color: "#A51C30",
+  },
+  {
+    name: "JOHNS HOPKINS",
+    sub: "ÜNİVERSİTESİ",
+    logo: "🎓",
+    url: "https://www.hopkinsmedicine.org/health/wellness-and-prevention/kegel-exercises-for-men",
+    color: "#002D72",
+  },
+  {
+    name: "MAYO CLINIC",
+    sub: "SAĞLIK KURULUŞU",
+    logo: "🏥",
+    url: "https://www.mayoclinic.org/healthy-lifestyle/mens-health/in-depth/kegel-exercises-for-men/art-20045074",
+    color: "#00529B",
+  },
+];
+
+function BilimScreen({ onNext }: { onNext: () => void }) {
+  return (
+    <div className="flex flex-col gap-4 pt-2 pb-2">
+      <div className="bg-[#111] rounded-2xl p-5 space-y-4">
+        <div className="space-y-1 text-center">
+          <p className="text-white text-xl font-black leading-tight">
+            Sadece söz değil,<br />
+            <span className="text-[#C9A84C]">kanıtlanmış bilim.</span>
+          </p>
+          <p className="text-[#888] text-sm">Lider kurumlar tarafından bilimsel olarak desteklenir:</p>
+        </div>
+        <div className="space-y-2">
+          {BILIM_UNIS.map(u => (
+            <a
+              key={u.name}
+              href={u.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#2A2A2A] bg-[#141414] hover:border-[#C9A84C]/40 transition-colors active:scale-[0.98]"
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-xl shrink-0"
+                style={{ backgroundColor: u.color + "22", border: `1px solid ${u.color}44` }}>
+                {u.logo}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white font-black text-sm tracking-wide">{u.name}</p>
+                <p className="text-[#C9A84C] text-[10px] font-semibold tracking-widest">{u.sub}</p>
+              </div>
+              <span className="text-[#444] text-xs shrink-0">Araştırmayı gör ↗</span>
+            </a>
+          ))}
+        </div>
+        <p className="text-center text-[#444] text-[10px]">
+          Bağlantılara dokunarak orijinal araştırmalara ulaşabilirsiniz.
+        </p>
+      </div>
+      <button onClick={onNext}
+        className="w-full py-4 rounded-2xl bg-[#C9A84C] text-black font-black text-lg hover:bg-[#E8C97A] transition-colors">
+        DEVAM ET →
+      </button>
+    </div>
+  );
+}
+
 function InfoImgStep({ img, onNext }: { img: string; onNext: () => void }) {
+  if (img === "info-bilim.jpg") return <BilimScreen onNext={onNext} />;
   const crop = IMG_CROP[img] ?? 0;
   return (
     <div className="flex flex-col gap-4 pt-2 pb-2">
