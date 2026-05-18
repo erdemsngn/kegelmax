@@ -10,13 +10,14 @@ Hata mesajları Türkçe olsun. Her açıklama sade ve anlaşılır olsun.
 - Minimum değişiklik yap. Dosyanın tamamını yeniden yazmak yerine sadece gerekli kısmı düzenle.
 - Büyük görevleri küçük adımlara böl; her adımdan sonra bir sonraki kritik adımı öner.
 - Hata ayıklarken önce kök nedeni bul, belirsizse bir kısa soru sor.
-- Adım adım açıkla, acele etme, hataları söyle.
+- Her değişiklikten sonra `npx tsc --noEmit` çalıştır, sonra `git add + commit + push` yap.
 
 ---
 
 ## Proje: Kegel Max — Pelvik Güç
 
-**Site:** kegel.max
+**Canlı site:** https://kegelmax.vercel.app
+**GitHub:** https://github.com/erdemsngn/kegelmax
 **Vizyon:** The Coach app (the.coach) tarzında Türkçe erkek sağlığı web funneli. Uygulama indirmeye gerek yok, telefon tarayıcısından açılır (mobile-first web app).
 
 ---
@@ -34,7 +35,10 @@ Hata mesajları Türkçe olsun. Her açıklama sade ve anlaşılır olsun.
 | Border | `#2A2A2A` |
 | Font | Plus Jakarta Sans (Google Fonts) |
 | Max genişlik | `430px`, `margin: auto` (telefon görünümü) |
-| Logo | Siyah kare + altın daire + K harfi + sağ üste ok (SVG) |
+
+### Logo
+`app/components/Logo.tsx` — Altın kare (#C9A84C) + siyah K harfi + ok ucu + anime hız çizgileri (SVG).
+Navbar'da `<Logo />` ve `<LogoIcon size={34} />` şeklinde kullanılıyor.
 
 ---
 
@@ -44,115 +48,95 @@ Hata mesajları Türkçe olsun. Her açıklama sade ve anlaşılır olsun.
 - **TypeScript**
 - **Tailwind CSS**
 - **Framer Motion** (animasyonlar)
-- **Node.js**
 
 ### Geliştirme Komutları
 ```bash
 npm run dev      # geliştirme sunucusu
 npm run build    # production build
-npm run lint     # lint kontrolü
-npx tsc --noEmit # type check
+npx tsc --noEmit # type check (her değişiklik sonrası çalıştır)
 ```
 
 ---
 
 ## Sayfa Yapısı
 
-| Sayfa | Açıklama |
+| Sayfa | Dosya | Durum |
+|---|---|---|
+| `/` | `app/page.tsx` | ✅ Tam |
+| `/quiz` | `app/quiz/page.tsx` | ✅ Tam |
+| `/result` | `app/result/page.tsx` | ✅ Tam |
+| `/checkout` | `app/checkout/page.tsx` | ✅ Tam |
+| `/success` | `app/success/page.tsx` | ✅ Tam |
+| `/program` | — | 🔲 YAPILMADI |
+
+---
+
+## Landing Page Bölüm Sırası (`app/page.tsx`)
+
+```
+Navbar → UrgencyBar → Hero → WhyUnique → Badges → MediaLogos →
+Experts → Programs → Stats → HowItWorks → Comparison →
+Testimonials → FAQ → Guarantee → FinalCTA → Footer → StickyCtaBar
+```
+
+### Önemli Landing Bileşenleri
+
+| Bileşen | Dosya | Not |
+|---|---|---|
+| Navbar | `components/landing/Navbar.tsx` | Sadece Logo + "Başla →" butonu |
+| UrgencyBar | `components/landing/UrgencyBar.tsx` | Fixed top-14, altın bar, toplam üye sayacı |
+| StickyCtaBar | `components/landing/StickyCtaBar.tsx` | Fixed bottom-0, canlı izleyici sayacı |
+| Hero | `components/landing/Hero.tsx` | Badge 350bin+, gizlilik metni, metrik kartlar |
+| MediaLogos | `components/landing/MediaLogos.tsx` | Sonsuz yatay marquee (22s) |
+| Experts | `components/landing/Experts.tsx` | 3 gerçek yabancı uzman + fotoğraflar |
+| QuizStartButton | `components/landing/QuizStartButton.tsx` | PrivacyModal açar |
+| PrivacyModal | `components/PrivacyModal.tsx` | 2 adımlı KVKK/ToS bottom sheet |
+
+### UrgencyBar Üye Sayısı Formülü
+Lansman: 1 Ocak 2024. Günde ~200 yeni kullanıcı.
+`250_000 + daysSinceLaunch * 200` → şu an ~350k
+
+---
+
+## Quiz Akışı (`app/quiz/page.tsx`)
+
+26 soru + ara ekranlar. Header'da "X/26" sayacı var.
+
+**Bölüm 1 — Giriş:** Yaş, motivasyon, ARA ekran
+**Bölüm 2 — Performans & Kontrol:** 9 soru + 2 ARA ekran
+**Bölüm 3 — Psikoloji & İlişkiler:** 9 soru + 1 ARA ekran
+**Bölüm 4 — Farkındalık & Eğitim:** 3 soru + 1 ARA ekran
+**Bölüm 5 — Yaşam Tarzı:** 4 soru
+
+---
+
+## Result Sayfası (`app/result/page.tsx`)
+
+3 adım:
+1. **LoadingStep** — 4 progress bar (hepsi %100), BAR_DURATION=1900ms, log mesajları gold renk geçişli, tamamlanınca canvas confetti
+2. **GoalStep** — "Hedefine Ulaş [bugün+28gün]", animasyonlu S-eğrisi grafik ("Şimdi" / "4 Hafta Sonra" baloncukları), bullet listesi
+3. **ComparisonStep** — Önce/sonra karşılaştırma tablosu
+
+---
+
+## Checkout Sayfası (`app/checkout/page.tsx`)
+
+- Açılışta canvas confetti (altın + beyaz)
+- Kupon kodu: `skill_may2026` (geri sayım sayacı)
+- 3 plan: Haftalık ₺199, 28 Gün ₺599 (varsayılan), Yıllık ₺1.599
+- Seçilen plana göre dinamik fine print
+
+---
+
+## CTA Buton Metinleri
+
+| Konum | Metin |
 |---|---|
-| `/` | Landing page (The Coach tarzı ikna edici) |
-| `/quiz` | 26 soruluk kişiselleştirme quiz'i |
-| `/result` | Analiz + hedef tarihi + karşılaştırma tablosu |
-| `/checkout` | Fiyatlandırma + Stripe ödeme |
-| `/success` | Ödeme sonrası başarı |
-
----
-
-## Quiz Akışı (26 Soru + Ara Ekranlar)
-
-**Bölüm 1 — Giriş:**
-- Yaş seçimi (18-29 / 30-39 / 40-49 / 50+) görsel kartlar
-- Ana motivasyon (ikonlu liste)
-- ARA: "Gücün Buradan Başlar" + anatomi SVG
-
-**Bölüm 2 — Performans & Kontrol:**
-- Ne kadar dayanıyorsun?
-- İdeal kontrol süresi?
-- Ne sıklıkla erken bitiriyorsun?
-- Yüksek uyarılmada dayanma süresi
-- Yoğunluğu bilinçli azaltabilir misin?
-- Uzun sürmek için ne önemli?
-- Ereksiyon puanı (1-5 slider)
-- Libido puanı (1-5 slider)
-- Seks isteği sıklığı
-- ARA: "1M+ erkek kontrolünü geliştirdi" + S eğrisi grafik
-- ARA: "Kegel + SKT = Daha İyi Performans" + uyarılma grafiği
-
-**Bölüm 3 — Psikoloji & İlişkiler:**
-- Seks sırasında özgüven?
-- Mevcut performanstan memnuniyet?
-- Yakınlık öncesi kaygı?
-- Partnerle bağ?
-- Kontrol özgüven için ne kadar önemli?
-- Gerilimi yavaşlatabilir misin? (1-5 slider)
-- Sertliği geri kazanma hızı (1-5 slider)
-- Pozisyon değiştirme sıklığı
-- Nefes kullanımı
-- ARA: "İkiniz İçin De İyi Hissettiriyor" + çift görseli
-
-**Bölüm 4 — Farkındalık & Eğitim:**
-- Haftalık pratik sıklığı
-- Seans uzunluğu tercihi
-- Yoğunluk seviyesi
-- ARA: "Harika Haber! Günde 5 dk yeterli"
-
-**Bölüm 5 — Yaşam Tarzı:**
-- Aktivite seviyesi
-- Günlük oturma süresi
-- Alkol sıklığı
-- Uyku süresi
-
----
-
-## Result Sayfası
-
-- **Adım 1:** Analiz loading (4 progress bar, 3sn)
-- **Adım 2:** "Hedefine Ulaş [bugün+28gün]"
-  - S eğrisi grafik animasyonlu (yavaşça çizilsin)
-  - Alt maddeler birer birer fade-in
-  - Buton: "Dönüşüme Başla 🚀" (pulse animasyonu)
-- **Adım 3:** Önce/Sonra karşılaştırma tablosu
-
----
-
-## Checkout Sayfası
-
-Açılışta confetti animasyonu (altın + beyaz, 1.5sn)
-Kupon kodu: `skill_may2026` (geri sayım sayacı)
-
-**3 Plan:**
-
-| Plan | Eski Fiyat | Yeni Fiyat | İndirim |
-|---|---|---|---|
-| Haftalık | ~~₺399~~ | ₺199 | %50 |
-| 28 Gün ⭐ EN POPÜLER *(varsayılan)* | ~~₺1.599~~ | ₺599 | %63 |
-| Yıllık EN MANTIKLI | ~~₺2.499~~ | ₺1.599 | %36 (günde ₺4) |
-
-Eski fiyatlar üstü çizik **ve** büyük görünsün. 30 gün para iade garantisi.
-
----
-
-## Motivasyon Ekranları (Quiz İçi)
-
-Her 2-3 soruda bir Unsplash fotoğraflı motivasyon ekranı:
-
-| Tema | URL |
-|---|---|
-| Egzersiz | unsplash.com/photo-1571019613454-1cb2f99b2d8b |
-| Meditasyon | unsplash.com/photo-1544367567-0f2fcb009e0b |
-| Çift | unsplash.com/photo-1552196563-55cd4e45efb3 |
-| Özgüven | unsplash.com/photo-1571019614242-c5c5dee9f50b |
-| Güç | unsplash.com/photo-1517836357463-d25dfeac3438 |
+| Hero (varsayılan) | Programını Al → |
+| FinalCTA | Kendini Yeniden Keşfet → |
+| Guarantee | Programa Hemen Başla → |
+| StickyCtaBar | Programa Hemen Başla → |
+| Navbar | Başla → |
 
 ---
 
@@ -160,43 +144,44 @@ Her 2-3 soruda bir Unsplash fotoğraflı motivasyon ekranı:
 
 | Servis | Durum |
 |---|---|
-| GitHub | `erdemsngn/kegelmax` ✅ oluşturuldu |
-| Stripe | Hesap var, entegrasyon ortakla birlikte yapılacak |
-| Supabase | KURULMADI |
-| Vercel | ✅ Deploy edildi — kegelmax.vercel.app |
-| E-posta servisi | KURULMADI |
+| GitHub | `erdemsngn/kegelmax` ✅ |
+| Vercel | ✅ kegelmax.vercel.app — GitHub push → otomatik deploy |
+| Stripe | 🔲 Hesap var, entegrasyon ortakla yapılacak |
+| Supabase | 🔲 KURULMADI |
+| E-posta | 🔲 KURULMADI |
 
 ---
 
 ## Yapılacaklar (Öncelik Sırası)
 
-1. ✅ Landing page
-2. ✅ Quiz akışı (26 soru + ara ekranlar)
-3. ✅ Result sayfası
-4. ✅ Checkout sayfası
-5. ✅ Motivasyon görselleri
-6. ✅ GitHub'a yükle (erdemsngn/kegelmax)
-7. ✅ Vercel deploy (internete aç) — kegelmax.vercel.app
-8. 🔲 Stripe ödeme entegrasyonu (ortakla birlikte — API anahtarları onda)
-9. 🔲 Supabase veritabanı
-10. 🔲 E-posta gönderimi
-11. 🔲 Kullanıcı auth sistemi
-12. 🔲 Egzersiz ekranı (kaldırıldı, geri eklenecek)
+1. ✅ Landing page (tüm bölümler)
+2. ✅ Quiz (26 soru + ara ekranlar + sayaç)
+3. ✅ Result sayfası (loading + grafik + karşılaştırma + confetti)
+4. ✅ Checkout sayfası (3 plan + kupon + confetti)
+5. ✅ Success sayfası
+6. ✅ KVKK/Privacy modal (2 adım)
+7. ✅ UrgencyBar + StickyCtaBar
+8. ✅ Logo yenileme (altın K + anime hız çizgileri)
+9. ✅ Vercel deploy
+10. 🔲 **Egzersiz / program ekranı** — satın alan kullanıcıya gösterilecek 28 günlük içerik
+11. 🔲 Kullanıcı auth (satın alım sonrası giriş)
+12. 🔲 Stripe ödeme entegrasyonu
+13. 🔲 Supabase veritabanı
+14. 🔲 E-posta gönderimi
 
 ---
 
 ## Ekip
 
-- **Erdem:** kurucu, Claude ile geliştiriyor
-- **Yazılımcı:** 2-3 gün yoğun, sonra devreye girecek
-- **Patron:** The Coach tarzı vizyon onayladı
+- **Erdem:** kurucu, Claude Code ile geliştiriyor, teknik bilgisi yok
+- **Yazılımcı:** ilerleyen aşamada devreye girecek
+- **Hedef:** The Coach tarzı Türkçe erkek sağlığı funneli
 
 ---
 
 ## Önemli Notlar
 
-- Kullanıcı teknik bilgisi yok, her şey sıfırdan öğreniyor
-- Tüm açıklamalar Türkçe ve sade olsun
-- Claude Code'da çalışıyoruz, Claude Design ayrı
-- `CLAUDE.local.md` gizli bilgiler için kullanılacak
-- `tasks/lessons.md` hata defteri olarak tutulsun
+- React StrictMode: state updater'ı dışında yan etki yapma (idx++ gibi şeyleri updater dışında tut)
+- Turkish characters Edit tool'unda bazen string matching bozuyor → o zaman Write ile tam yeniden yaz
+- `style jsx` Tailwind projede çalışıyor (MediaLogos marquee animasyonu için kullanıldı)
+- Canvas confetti: dependency-free, hem result hem checkout'ta aynı pattern
