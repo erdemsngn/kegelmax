@@ -102,13 +102,46 @@ const TESTIMONIALS = [
   { text: "50'ye yaklaşıyorum ama 30'umu buldum adeta. Muhteşem.", name: "Tolga S.", meta: "47 · İstanbul" },
 ];
 
+const NICKNAMES = [
+  "Arda K.", "Mert B.", "Can Y.", "Burak S.", "Emre T.",
+  "Kaan D.", "Berk A.", "Tuna M.", "Ege C.", "Alp R.",
+];
+
+function JoinNotificationBar() {
+  const [idx, setIdx] = useState(() => Math.floor(Math.random() * 10));
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIdx(i => (i + 1) % 10);
+        setVisible(true);
+      }, 600);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div
+      className="flex items-center gap-2 px-4 py-2 bg-[#141414] border border-[#2A2A2A] rounded-xl"
+      style={{ transition: "opacity 0.6s ease", opacity: visible ? 1 : 0 }}
+    >
+      <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
+      <p className="text-[#888] text-xs">
+        <span className="text-white font-semibold">{NICKNAMES[idx]}</span> az önce programa katıldı
+      </p>
+    </div>
+  );
+}
+
 function TestimonialCarousel() {
   const [idx, setIdx] = useState(() => Math.floor(Math.random() * 16));
 
   useEffect(() => {
     const id = setInterval(() => {
       setIdx(i => (i + 1) % 16);
-    }, 4000);
+    }, 6000);
     return () => clearInterval(id);
   }, []);
 
@@ -117,16 +150,16 @@ function TestimonialCarousel() {
   return (
     <div className="space-y-2">
       <p className="text-[#555] text-[10px] uppercase tracking-widest font-semibold px-0.5">
-        Kullanıcı Yorumları · {idx + 1} / 16
+        Kullanıcı Yorumları
       </p>
       <div className="overflow-hidden rounded-2xl">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
             key={idx}
-            initial={{ x: 260, opacity: 0 }}
+            initial={{ x: 280, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -260, opacity: 0 }}
-            transition={{ duration: 0.45, ease: "easeInOut" }}
+            exit={{ x: -280, opacity: 0 }}
+            transition={{ duration: 0.65, ease: "easeInOut" }}
             className="flex gap-3 p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl items-start"
           >
             <span className="text-xl shrink-0">⭐</span>
@@ -214,6 +247,9 @@ export default function CheckoutPage() {
         <LogoIcon size={28} />
         <div className="w-8" />
       </div>
+
+      {/* Canlı katılım bildirimi */}
+      <JoinNotificationBar />
 
       <h1 className="text-2xl font-black text-white">Kişisel Kegel Planını Al</h1>
 
