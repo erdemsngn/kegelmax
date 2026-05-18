@@ -4,6 +4,8 @@ const FEATURES = [
   { icon: "🧠", title: "Mental Destek",            desc: "Kaygıyı azalt, kontrolü geri kazan." },
   { icon: "👨‍⚕️", title: "Uzman Rehberliği",      desc: "Lider cinsel sağlık uzmanlarıyla geliştirilen program." },
   { icon: "🎧", title: "Rehberli Meditasyon",     desc: "Uyarılmayı ve ereksiyon kalitesini güçlendir." },
+  { icon: "🔒", title: "%100 Gizli & Güvenli",   desc: "Cevapların hiçbir zaman saklanmaz. Kimliğin anonim kalır — sadece sen bilirsin." },
+  { icon: "🚻", title: "Kadın & Erkek İçin",     desc: "Program her iki partner için de uyarlanabilir. Birlikte veya ayrı ayrı kullanılabilir." },
 ];
 
 export default function WhyUnique() {

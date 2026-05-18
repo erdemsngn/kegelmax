@@ -34,7 +34,13 @@ export default function Hero() {
         </p>
 
         {/* CTA */}
-        <QuizStartButton />
+        <div className="space-y-2">
+          <QuizStartButton />
+          <p className="text-[#555] text-[11px] flex items-center gap-1.5">
+            <span>🔒</span>
+            Cevapların saklanmaz · Kadın & erkek için · %100 gizli
+          </p>
+        </div>
 
         {/* Float metric cards 2×2 */}
         <div className="grid grid-cols-2 gap-3 pt-1">
