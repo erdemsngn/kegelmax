@@ -81,6 +81,63 @@ function useCountdown(initialSeconds: number) {
   return `${m}:${s}`;
 }
 
+// ── Testimonials ─────────────────────────────────────────────────────────────
+const TESTIMONIALS = [
+  { text: "3. haftada gerçekten fark ettim. Daha önce hiç böyle hissetmemiştim.", name: "Ahmet Y.", meta: "34 · İstanbul" },
+  { text: "Eşim değişimi fark edip bana söyledi. En güzel geri bildirim oydu.", name: "Mehmet K.", meta: "28 · Ankara" },
+  { text: "Skeptiktim ama sonuçlar beni şaşırttı. 2. haftada ikna oldum.", name: "Burak T.", meta: "41 · İzmir" },
+  { text: "Günde 10 dakika bu kadar fark yaratır mı? Yaratıyor.", name: "Emre S.", meta: "36 · Bursa" },
+  { text: "Özgüvenim çok arttı. Hem performans hem zihinsel olarak.", name: "Hasan D.", meta: "29 · Antalya" },
+  { text: "45'e yaklaşırken böyle sonuç beklemiyordum. Şaşırdım.", name: "Kerem A.", meta: "44 · Adana" },
+  { text: "Partner memnuniyeti arttı. Bu en önemli şeydi benim için.", name: "Oğuz M.", meta: "32 · Konya" },
+  { text: "Hayatımın en iyi dijital yatırımı. Ciddiye alın.", name: "Serkan B.", meta: "38 · Trabzon" },
+  { text: "İlk hafta inanmadım, 2. haftada anladım ne olduğunu.", name: "Fatih Y.", meta: "27 · Kayseri" },
+  { text: "Kontrolü geri kazanmak paha biçilemez. Teşekkürler.", name: "Murat C.", meta: "43 · Eskişehir" },
+  { text: "Beklentilerimi aştı. Quiz analizi de çok doğruydu.", name: "Tarık H.", meta: "31 · Gaziantep" },
+  { text: "Genel vücut sağlığım da düzeldi. Hiç beklemediğim bir bonus.", name: "Ali R.", meta: "39 · Samsun" },
+  { text: "Gençken keşke bilseydim. 26'mda öğrendim, neyse ki erken.", name: "Çağrı E.", meta: "26 · Mersin" },
+  { text: "28 günlük programı bitirdim, hedefi aştım. Gerçekten çalışıyor.", name: "Ufuk K.", meta: "33 · Bodrum" },
+  { text: "Arkadaşa önerdim, o da başladı. İkimiz de memnunuz.", name: "Volkan D.", meta: "37 · Antalya" },
+  { text: "50'ye yaklaşıyorum ama 30'umu buldum adeta. Muhteşem.", name: "Tolga S.", meta: "47 · İstanbul" },
+];
+
+function TestimonialCarousel() {
+  // Her oturumda/kullanıcıda farklı grup başlasın
+  const [groupIdx, setGroupIdx] = useState(() => Math.floor(Math.random() * 4));
+  const [fading, setFading] = useState(false);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setFading(true);
+      setTimeout(() => {
+        setGroupIdx(g => (g + 1) % 4);
+        setFading(false);
+      }, 350);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  const group = TESTIMONIALS.slice(groupIdx * 4, groupIdx * 4 + 4);
+
+  return (
+    <div className="space-y-2" style={{ transition: "opacity 0.35s", opacity: fading ? 0 : 1 }}>
+      <p className="text-[#555] text-[10px] uppercase tracking-widest font-semibold px-0.5">
+        Kullanıcı Yorumları · {groupIdx * 4 + 1}–{groupIdx * 4 + 4} / 16
+      </p>
+      {group.map((t, i) => (
+        <div key={`${groupIdx}-${i}`}
+          className="flex gap-2.5 p-3 bg-[#141414] border border-[#2A2A2A] rounded-xl items-start">
+          <span className="text-sm shrink-0 mt-0.5">⭐</span>
+          <div className="min-w-0">
+            <p className="text-white/90 text-xs leading-relaxed">&ldquo;{t.text}&rdquo;</p>
+            <p className="text-[#555] text-[10px] mt-1">— {t.name}, {t.meta}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Plan data ────────────────────────────────────────────────────────────────
 const PLANS = [
   {
@@ -241,16 +298,8 @@ export default function CheckoutPage() {
         <p className="text-[#555] text-xs">İstediğin zaman iptal edebilirsin</p>
       </div>
 
-      {/* Sosyal kanıt */}
-      <div className="flex gap-3 p-4 bg-[#141414] border border-[#2A2A2A] rounded-2xl items-start">
-        <span className="text-2xl shrink-0">⭐</span>
-        <div>
-          <p className="text-white text-sm font-semibold leading-snug">
-            "3. haftada gerçekten fark ettim. Daha önce hiç böyle hissetmemiştim."
-          </p>
-          <p className="text-[#555] text-xs mt-1">— Ahmet Y., 34 · İstanbul · 28 Günlük Plan</p>
-        </div>
-      </div>
+      {/* Sosyal kanıt carousel */}
+      <TestimonialCarousel />
 
       {/* E-posta */}
       <div className="space-y-2">
