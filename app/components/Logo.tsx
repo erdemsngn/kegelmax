@@ -1,38 +1,60 @@
 import Link from "next/link";
 
-export function LogoIcon({ size = 40 }: { size?: number }) {
+export function LogoIcon({ size = 44 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Altın arka plan */}
-      <rect width="40" height="40" rx="10" fill="#C9A84C" />
+    <svg width={size} height={size} viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#E8C97A"/>
+          <stop offset="55%" stopColor="#C9A84C"/>
+          <stop offset="100%" stopColor="#A07830"/>
+        </linearGradient>
+      </defs>
 
-      {/* Anime hız çizgileri — okun ucundan yukarı-sağa fışkırıyor */}
-      <line x1="28" y1="8"  x2="33" y2="2"  stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeOpacity="0.60"/>
-      <line x1="31" y1="12" x2="38" y2="9"  stroke="white" strokeWidth="0.9" strokeLinecap="round" strokeOpacity="0.42"/>
-      <line x1="26" y1="5"  x2="29" y2="0"  stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeOpacity="0.30"/>
+      {/* Koyu arka plan */}
+      <rect width="60" height="60" rx="14" fill="#111"/>
 
-      {/* K — dikey çubuk */}
-      <path d="M12 9 L12 31" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+      {/* Altın çerçeve */}
+      <rect width="60" height="60" rx="14" fill="none"
+        stroke="url(#gold)" strokeWidth="2.2" filter="url(#glow)"/>
 
-      {/* K — alt kol */}
-      <path d="M12 20 L26 31" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+      {/* Daire */}
+      <circle cx="28" cy="30" r="15.5"
+        stroke="url(#gold)" strokeWidth="2.8" fill="none" filter="url(#glow)"/>
 
-      {/* K — üst kol (oka kadar) */}
-      <path d="M12 20 L26 9" stroke="#0A0A0A" strokeWidth="4.5" strokeLinecap="round"/>
+      {/* K harfi — kalın, net */}
+      {/* Dikey sol çubuk */}
+      <line x1="21" y1="19" x2="21" y2="41"
+        stroke="url(#gold)" strokeWidth="3.8" strokeLinecap="round"/>
+      {/* Üst kol */}
+      <line x1="21" y1="30" x2="32" y2="19"
+        stroke="url(#gold)" strokeWidth="3.8" strokeLinecap="round"/>
+      {/* Alt kol */}
+      <line x1="21" y1="30" x2="32" y2="41"
+        stroke="url(#gold)" strokeWidth="3.8" strokeLinecap="round"/>
 
-      {/* Ok ucu — üst kolun ucunda, yukarı-sağa işaret ediyor */}
-      <path d="M20 10 L26 9 L25 15" stroke="#0A0A0A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* Mars oku — daireden sağ üste uzanır */}
+      {/* Gövde çizgisi */}
+      <line x1="39" y1="19" x2="50" y2="8"
+        stroke="url(#gold)" strokeWidth="2.8" strokeLinecap="round" filter="url(#glow)"/>
+      {/* Ok başı — L şekli */}
+      <polyline points="43,8 50,8 50,15"
+        stroke="url(#gold)" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" fill="none" filter="url(#glow)"/>
     </svg>
   );
 }
 
 export default function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2.5">
-      <LogoIcon size={34} />
+    <Link href="/" className="flex items-center gap-3">
+      <LogoIcon size={44} />
       <div className="flex flex-col leading-none">
-        <span className="font-black text-white text-[13px] tracking-[0.06em] uppercase">Kegel</span>
-        <span className="font-black text-[#C9A84C] text-[13px] tracking-[0.10em] uppercase">Max</span>
+        <span className="font-black text-white text-[16px] tracking-[0.06em] uppercase">Kegel</span>
+        <span className="font-black text-[#C9A84C] text-[16px] tracking-[0.10em] uppercase">Max</span>
       </div>
     </Link>
   );
