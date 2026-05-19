@@ -395,7 +395,7 @@ function ComparisonStep() {
 
         {/* Sol yarı — grayscale */}
         <div
-          className="relative w-[42%] overflow-hidden"
+          className="w-[42%]"
           style={{
             backgroundImage: "url('/info-simdiki-hedef.jpg')",
             backgroundSize: "238% 100%",
@@ -403,22 +403,22 @@ function ComparisonStep() {
             backgroundRepeat: "no-repeat",
             filter: "grayscale(100%) brightness(0.6)",
           }}
-        >
-          {/* Kırmızı etiketler — altta */}
-          <div className="absolute bottom-3 left-2 flex flex-col gap-1.5">
-            {[
-              { icon: "📉", label: "Özgüven Düşük" },
-              { icon: "👥", label: "Partner Stresi" },
-              { icon: "⚠️", label: "Performans Kaygısı" },
-            ].map(item => (
-              <div key={item.label} className="flex items-center gap-1.5">
-                <div className="w-5 h-5 rounded-full bg-red-600/90 flex items-center justify-center shrink-0 text-[9px]">
-                  {item.icon}
-                </div>
-                <span className="text-white text-[9px] font-semibold drop-shadow">{item.label}</span>
+        />
+
+        {/* Kırmızı etiketler — parent'a absolute, fotoğrafın üstünde */}
+        <div className="absolute bottom-3 left-2 flex flex-col gap-1.5 z-20 pointer-events-none">
+          {[
+            { icon: "📉", label: "Özgüven Düşük" },
+            { icon: "👥", label: "Partner Stresi" },
+            { icon: "⚠️", label: "Performans Kaygısı" },
+          ].map(item => (
+            <div key={item.label} className="flex items-center gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-red-600/90 flex items-center justify-center shrink-0 text-[9px]">
+                {item.icon}
               </div>
-            ))}
-          </div>
+              <span className="text-white text-[9px] font-semibold drop-shadow">{item.label}</span>
+            </div>
+          ))}
         </div>
 
         {/* Orta — parlayan oklar + badge */}
@@ -429,11 +429,11 @@ function ComparisonStep() {
             <span className="text-[#C9A84C] text-2xl font-black leading-none">›</span>
             <span className="text-[#B8922A] text-2xl font-black leading-none">›</span>
           </div>
-          {/* 7 GÜN SONRA badge */}
+          {/* 28 GÜN SONRA badge */}
           <div className="bg-black/90 border border-[#C9A84C] rounded-xl px-3 py-2 text-center"
             style={{ boxShadow: "0 0 12px #C9A84C55" }}>
             <div className="text-[#C9A84C] text-base mb-0.5">📅</div>
-            <p className="text-[#C9A84C] text-[10px] font-black leading-tight">7 GÜN</p>
+            <p className="text-[#C9A84C] text-[10px] font-black leading-tight">28 GÜN</p>
             <p className="text-[#C9A84C] text-[10px] font-black leading-tight">SONRA</p>
           </div>
         </div>
