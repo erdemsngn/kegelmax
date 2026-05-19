@@ -252,9 +252,6 @@ function GoalStep({ onNext }: { onNext: () => void }) {
       <div className="bg-[#141414] border border-[#2A2A2A] rounded-2xl p-4">
         <svg viewBox="0 0 280 160" className="w-full overflow-visible">
 
-          {/* Başlık */}
-          <text x="16" y="14" fill="#666" fontSize="8.5" fontWeight="600">Performans Seviyeniz</text>
-
           {/* Grid yatay çizgiler */}
           <line x1="16" y1="28" x2="264" y2="28" stroke="#1E1E1E" strokeWidth="1"/>
           <line x1="16" y1="55" x2="264" y2="55" stroke="#1E1E1E" strokeWidth="1"/>
@@ -316,6 +313,31 @@ function GoalStep({ onNext }: { onNext: () => void }) {
             <rect x="182" y="5" width="66" height="19" rx="5" fill="#C9A84C"/>
             <path d="M238 24 L250 26 L232 24" fill="#C9A84C"/>
             <text x="215" y="18" textAnchor="middle" fill="#0A0A0A" fontSize="8" fontWeight="800">4 Hafta Sonra</text>
+          </motion.g>
+
+          {/* Eğri ortasında floating label */}
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4, duration: 0.5 }}>
+            <rect x="88" y="62" width="88" height="15" rx="4" fill="#1E1E1E" stroke="#2A2A2A" strokeWidth="0.8"/>
+            <text x="132" y="73" textAnchor="middle" fill="#888" fontSize="7.5">Mahrem Hayat Seviyesi</text>
+          </motion.g>
+
+          {/* Zıplayan ok — bitiş noktasının üstünde */}
+          <motion.g
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, -7, 0] }}
+            transition={{
+              opacity: { delay: 2.3, duration: 0.4 },
+              y: { delay: 2.3, duration: 1.1, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            {/* Ok başı */}
+            <path d="M246 18 L250 11 L254 18"
+              stroke="#C9A84C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            {/* Kesik çizgi gövde */}
+            <line x1="250" y1="19" x2="250" y2="24"
+              stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2"/>
+            <line x1="250" y1="26" x2="250" y2="29"
+              stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="2 2" strokeOpacity="0.5"/>
           </motion.g>
 
         </svg>
